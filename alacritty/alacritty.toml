@@ -1,0 +1,15 @@
+[font]
+normal.family = 'JetBrains Mono'
+normal.style  = 'Regular'
+
+[general]
+working_directory = '.'
+
+[terminal.shell]
+args    = [ '-WorkingDirectory ~' ]
+program = 'pwsh'
+
+[window]
+dimensions = { columns = 90, lines = 30 }
+# position = None
+padding = { x = 5, y = 5 }

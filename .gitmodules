@@ -1,0 +1,7 @@
+[submodule "onedark.yazi"]
+	path = yazi/config/flavors/onedark.yazi
+	url = https://github.com/BennyOe/onedark.yazi
+
+[submodule "tokyo-night.yazi"]
+	path = yazi/config/flavors/tokyo-night.yazi
+	url = https://github.com/BennyOe/tokyo-night.yazi

@@ -1,0 +1,91 @@
+theme = 'catppuccin_macchiato_latest'
+
+[editor]
+auto-format        = true
+auto-save          = true
+bufferline         = 'multiple'
+color-modes        = true
+completion-replace = true
+completion-timeout = 50
+cursorline         = true
+line-number        = 'relative'
+shell              = [ 'pwsh', '-Command' ]
+true-color         = true
+
+[editor.cursor-shape]
+insert = 'bar'
+select = 'underline'
+
+[editor.file-picker]
+hidden = false
+
+[editor.whitespace.render]
+# space = "all"
+tab = "all"
+
+[editor.whitespace.characters]
+space = "·"
+tab   = "→"
+
+[editor.indent-guides]
+# character = '┆'
+render = true
+
+[editor.soft-wrap]
+enable = true
+# wrap-indicator = ""
+
+# [editor.inline-diagnostics]
+# cursor-line = 'warning'
+# other-lines = 'info'
+# prefix-len = 1
+# max-wrap = 20
+# max-diagnostics = 10
+
+[editor.lsp]
+auto-signature-help = false
+display-inlay-hints = true
+display-messages    = true
+
+[editor.statusline]
+left = [
+  'mode',
+  'spinner',
+  'version-control',
+  'file-name',
+  'read-only-indicator',
+  'file-modification-indicator',
+]
+right = [
+  "file-line-ending",
+  "file-encoding",
+  # "spacer",
+  "diagnostics",
+  "selections",
+  "register",
+  "position",
+]
+
+[editor.gutters]
+layout = [ "spacer", "diagnostics", "line-numbers", "spacer", "diff" ]
+
+[keys.normal]
+'A'   = [ ':sh im-select 2052', 'insert_at_line_end' ]
+'A-[' = 'goto_previous_buffer'
+'A-]' = 'goto_next_buffer'
+'A-w' = ':buffer-close'
+'I'   = [ ':sh im-select 2052', 'insert_at_line_start' ]
+'O'   = [ ':sh im-select 2052', 'open_above' ]
+'a'   = [ ':sh im-select 2052', 'move_char_right', 'insert_mode' ]
+'esc' = [ ':sh im-select 1033', 'normal_mode' ]
+'i'   = [ ':sh im-select 2052', 'insert_mode' ]
+'o'   = [ ':sh im-select 2052', 'open_below' ]
+
+# [keys.normal."["]
+# b = 'goto_previous_buffer'
+
+# [keys.normal."]"]
+# b = 'goto_next_buffer'
+
+[keys.insert]
+'esc' = [ ':sh im-select 1033', 'normal_mode' ]

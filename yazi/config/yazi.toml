@@ -1,0 +1,16 @@
+[opener]
+edit = [
+  { run = "hx '$@'", block = true, for = "unix" },
+  { run = "hx %*", block = true, for = "windows" },
+]
+# open = [{ run = "start \"\" \"%1\"", orphan = true, for = "windows" }]
+
+[open]
+prepend_rules = [
+  { name = "*/", use = [
+    "open",
+    "reveal",
+    "edit",
+  ] },
+  { name = "*.toml", use = "edit" },
+]
