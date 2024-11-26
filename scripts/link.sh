@@ -1,7 +1,5 @@
-dot_cfg="~/.config"
+dot_cfg="$HOME/.config"
 
-ln -s "$dot_cfg/gitui" gitui
-ln -s "$doc_cfg/helix" helix
-ln -s "$dot_cfg/yazi" yazi
-
-
+sudo ln -s "$(pwd)/gitui" "$dot_cfg/gitui"
+sudo ln -s "$(pwd)/helix" "$doc_cfg/helix"
+sudo ln -s "$(pwd)/yazi" "$dot_cfg/yazi"
