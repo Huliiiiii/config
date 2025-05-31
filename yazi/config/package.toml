@@ -1,5 +1,1 @@
-[plugin]
-deps = [  ]
 
-[flavor]
-deps = [ { use = "dangooddd/kanagawa", rev = "b32f205" } ]

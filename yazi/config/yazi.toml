@@ -1,9 +1,12 @@
 [opener]
 edit = [
-  { run = "hx '$@'", block = true, for = "unix" },
+  { run = "hx $@", block = true, for = "unix" },
   { run = "hx %*", block = true, for = "windows" },
 ]
-# open = [{ run = "start \"\" \"%1\"", orphan = true, for = "windows" }]
+open = [
+  { run = 'hx $1', block = true, for = "linux" },
+  { run = "start \"\" \"%1\"", orphan = true, for = "windows" },
+]
 
 [open]
 prepend_rules = [
