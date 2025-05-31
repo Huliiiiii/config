@@ -1,15 +1,20 @@
 [language-server]
-deno         = { command = "deno", args = [ "lsp" ] }
-emmet-ls     = { command = "emmet-ls", args = [ "--stdio" ] }
-terraform-ls = { command = "terraform-ls", args = [ "serve" ] }
-
+deno = { command = "deno", args = [
+  "lsp",
+] }
+emmet-ls = { command = "emmet-ls", args = [
+  "--stdio",
+] }
+terraform-ls = { command = "terraform-ls", args = [
+  "serve",
+] }
 
 [language-server.typos]
 # typos-lsp must be on your PATH, or otherwise change this to an absolute path to typos-lsp
 command = "typos-lsp"
 # Logging level of the language server. Defaults to error.
 # Run with helix -v to output LSP logs to the editor log (:log-open)
-environment = {"RUST_LOG" = "error"}
+environment = { "RUST_LOG" = "error" }
 # Custom config. Used together with a config file found in the workspace or its parents,
 # taking precedence for settings declared in both. Equivalent to the typos `--config` cli argument.
 config.config = "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml"
@@ -24,19 +29,23 @@ config.diagnosticSeverity = "Warning"
 command = "clippy"
 
 [[language]]
+language-servers = [
+  "rust-analyzer",
+  "typos",
+]
 name = "rust"
-language-servers = ["rust-analyzer", "typos"]
 
 [language-server.eslint.config]
-codeActionsOnSave   = { mode = "all", "source.fixAll.eslint" = true }
-experimental        = {}
-format              = { enable = true }
-nodePath            = ""
-problems            = { shortenToSingleLine = false }
-quiet               = false
-rulesCustomizations = [  ]
-run                 = "onType"
-validate            = "on"
+codeActionsOnSave = { mode = "all", "source.fixAll.eslint" = true }
+experimental = {}
+format = { enable = true }
+nodePath = ""
+problems = { shortenToSingleLine = false }
+quiet = false
+rulesCustomizations = [
+]
+run = "onType"
+validate = "on"
 
 [language-server.eslint.config.codeAction]
 disableRuleComment = { enable = true, location = "separateLine" }
@@ -54,7 +63,10 @@ scss             = { validate = { enable = true } }
 
 [[language]]
 auto-format = true
-formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+formatter = { command = "prettier", args = [
+  "--parser",
+  "typescript",
+] }
 language-servers = [
   "typescript-language-server",
   "vscode-eslint-language-server",
@@ -63,7 +75,10 @@ name = "typescript"
 
 [[language]]
 auto-format = true
-formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+formatter = { command = "prettier", args = [
+  "--parser",
+  "typescript",
+] }
 language-servers = [
   "typescript-language-server",
   "vscode-eslint-language-server",
@@ -73,7 +88,10 @@ name = "tsx"
 
 [[language]]
 auto-format = true
-formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+formatter = { command = "prettier", args = [
+  "--parser",
+  "typescript",
+] }
 language-servers = [
   "typescript-language-server",
   "vscode-eslint-language-server",
@@ -82,7 +100,10 @@ name = "javascript"
 
 [[language]]
 auto-format = true
-formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+formatter = { command = "prettier", args = [
+  "--parser",
+  "typescript",
+] }
 language-servers = [
   "typescript-language-server",
   "vscode-eslint-language-server",
@@ -91,22 +112,37 @@ language-servers = [
 name = "jsx"
 
 [[language]]
-auto-format      = true
-formatter        = { command = 'prettier', args = [ "--parser", "html" ] }
-language-servers = [ "vscode-html-language-server", "emmet-ls" ]
-name             = "html"
+auto-format = true
+formatter = { command = 'prettier', args = [
+  "--parser",
+  "html",
+] }
+language-servers = [
+  "vscode-html-language-server",
+  "emmet-ls",
+]
+name = "html"
 
 [[language]]
-auto-format      = true
-formatter        = { command = 'prettier', args = [ "--parser", "css" ] }
-language-servers = [ "vscode-css-language-server", "emmet-ls" ]
-name             = "css"
+auto-format = true
+formatter = { command = 'prettier', args = [
+  "--parser",
+  "css",
+] }
+language-servers = [
+  "vscode-css-language-server",
+  "emmet-ls",
+]
+name = "css"
 
 # json
 [[language]]
 auto-format = true
-formatter   = { command = "prettier", args = [ "--parser", "json" ] }
-name        = "json"
+formatter = { command = "prettier", args = [
+  "--parser",
+  "json",
+] }
+name = "json"
 
 # yaml
 [language-server.yaml-language-server.config.yaml]
@@ -119,23 +155,40 @@ validation = true
 
 # toml
 [language-server.taplo.config]
-root_dir = [ ".git", "*.toml" ]
+root_dir = [
+  "*.toml",
+  ".git",
+]
 
 [[language]]
 auto-format = true
-name        = "toml"
+formatter = { command = "taplo", args = [
+  "fmt",
+  "-",
+] }
+name = "toml"
 
 [[language]]
-language-id      = "terraform"
-language-servers = [ "terraform-ls" ]
-name             = "hcl"
+language-id = "terraform"
+language-servers = [
+  "terraform-ls",
+]
+name = "hcl"
 
 [[language]]
-language-id      = "terraform-vars"
-language-servers = [ "terraform-ls" ]
-name             = "tfvars"
+language-id = "terraform-vars"
+language-servers = [
+  "terraform-ls",
+]
+name = "tfvars"
 
 [[language]]
-formatter        = { command = "dprint", args = [ "fmt", "--stdin", "md" ] }
-language-servers = [ "markdown-oxide" ]
-name             = "markdown"
+formatter = { command = "dprint", args = [
+  "fmt",
+  "--stdin",
+  "md",
+] }
+language-servers = [
+  "markdown-oxide",
+]
+name = "markdown"

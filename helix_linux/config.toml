@@ -1,19 +1,16 @@
 theme = 'catppuccin_macchiato'
 
 [editor]
-auto-format = true
-auto-save = true
-bufferline = 'multiple'
-color-modes = true
-completion-replace = true
-completion-timeout = 50
-cursorline = true
-line-number = 'relative'
-shell = [
-  'pwsh',
-  '-Command',
-]
-true-color = true
+auto-format             = true
+auto-save               = true
+bufferline              = 'multiple'
+color-modes             = true
+completion-replace      = true
+completion-timeout      = 50
+cursorline              = true
+end-of-line-diagnostics = "hint"
+line-number             = 'relative'
+true-color              = true
 
 [editor.cursor-shape]
 insert = 'bar'
@@ -38,12 +35,12 @@ render = true
 enable = true
 # wrap-indicator = ""
 
-# [editor.inline-diagnostics]
-# cursor-line = 'warning'
-# other-lines = 'info'
-# prefix-len = 1
-# max-wrap = 20
-# max-diagnostics = 10
+[editor.inline-diagnostics]
+cursor-line     = 'warning'
+max-diagnostics = 10
+max-wrap        = 20
+other-lines     = 'info'
+prefix-len      = 1
 
 [editor.lsp]
 auto-signature-help = false
@@ -79,38 +76,9 @@ layout = [
 ]
 
 [keys.normal]
-'A' = [
-  ':sh im-select 2052',
-  'insert_at_line_end',
-]
-'A-[' = 'goto_next_buffer'
-'A-]' = 'goto_previous_buffer'
+'A-[' = 'goto_previous_buffer'
+'A-]' = 'goto_next_buffer'
 'A-w' = ':buffer-close'
-'I' = [
-  ':sh im-select 2052',
-  'insert_at_line_start',
-]
-'O' = [
-  ':sh im-select 2052',
-  'open_above',
-]
-'a' = [
-  ':sh im-select 2052',
-  'move_char_right',
-  'insert_mode',
-]
-'esc' = [
-  ':sh im-select 1033',
-  'normal_mode',
-]
-'i' = [
-  ':sh im-select 2052',
-  'insert_mode',
-]
-'o' = [
-  ':sh im-select 2052',
-  'open_below',
-]
 
 [keys.select]
 'A-[' = 'goto_next_buffer'
@@ -121,9 +89,3 @@ layout = [
 
 # [keys.normal."]"]
 # b = 'goto_next_buffer'
-
-[keys.insert]
-'esc' = [
-  ':sh im-select 1033',
-  'normal_mode',
-]
