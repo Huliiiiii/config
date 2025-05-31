@@ -1,0 +1,11 @@
+[experimental]
+autoMemoryReclaim=gradual
+dnsTunneling=true
+firewall=true
+networkingMode=mirrored
+sparseVhd=true
+
+[wsl2]
+kernelCommandLine=ipv6.disable=1
+
+vmIdleTimeout=1800000
