@@ -79,7 +79,7 @@ layout = [
 ]
 
 [keys.normal]
-{{im_select.normal}}
+# {{im_select.normal}}
 'A-[' = 'goto_next_buffer'
 'A-]' = 'goto_previous_buffer'
 'A-w' = ':buffer-close'
@@ -89,4 +89,4 @@ layout = [
 'A-]' = 'goto_previous_buffer'
 
 [keys.insert]
-{{im_select.insert}}
+# {{im_select.insert}}
