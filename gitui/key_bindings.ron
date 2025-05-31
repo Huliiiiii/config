@@ -22,7 +22,7 @@
     // page_down: Some(( code: Char('f'), modifiers: "CONTROL")),
     // exit_popup: Some(( code: Char('q'), modifiers: "")),
     
-    edit_file: Some(( code: Char('i'), modifiers: "")),
+    edit_file: Some(( code: Char('w'), modifiers: "CONTROL")),
         
     stage_unstage_item: Some(( code: Char('a'), modifiers: "")),
     status_stage_all: Some(( code: Char('A'), modifiers: "SHIFT")),
@@ -38,4 +38,10 @@
     // stash_open: Some(( code: Char('l'), modifiers: "")),
 
     // abort_merge: Some(( code: Char('M'), modifiers: "SHIFT")),
+    diff_hunk_prev: Some(( code: Char('N'), modifiers: "SHIFT")),
+    // Commit
+    
+    // new_line: Some(( code: Enter, modifiers: "")),
+    // commit: Some(( code: Enter, modifiers: "CONTROL")),
+    open_commit_editor: Some(( code: Char('o'), modifiers: "CONTROL")),
 )
