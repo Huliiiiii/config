@@ -1,13 +1,10 @@
 $env:HOME = $HOME
-$ConfigPath = "D:\config"
 
-$_src = "$ConfigPath\Powershell\Src"
-
-Set-Alias sh "C:\Program Files\Git\git-bash.exe"
+Set-Alias sh 'C:\Program Files\Git\git-bash.exe'
 
 function wezssh() {
     param(
-        [Parameter(Position=0)]
+        [Parameter(Position = 0)]
         [string]$target
     )
 
@@ -23,21 +20,21 @@ function dl {
     )
 
     if ([string]::IsNullOrWhiteSpace($url)) {
-        Write-Error "Error: URL cannot be empty."
+        Write-Error 'Error: URL cannot be empty.'
         return
     }
 
     do {
         Write-Host "Trying to download $url..."
-        wget -c -t 0 --retry-connrefused --waitretry=5 @ExtraArgs $url 
+        wget -c -t 0 --retry-connrefused --waitretry=5 @ExtraArgs $url
         $success = $LASTEXITCODE
         if ($success -ne 0) {
-            Write-Host "Download failed. Retrying in 5 seconds..."
+            Write-Host 'Download failed. Retrying in 5 seconds...'
             Start-Sleep -Seconds 5
         }
     } while ($success -ne 0)
 
-    Write-Host "Download completed successfully!"
+    Write-Host 'Download completed successfully!'
 }
 
 [console]::OutputEncoding = [console]::InputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
@@ -64,13 +61,13 @@ function dl {
             }
         }
     },
-    (. "$_src/Aliases.ps1"),
+    { . "$PSScriptRoot/Src/Aliases.ps1" },
     # PSReadline Settings
-    (. "$_src/Function.ps1"),
-    (. "$_src/PSRL.ps1" ),
+    { . "$PSScriptRoot/Src/Function.ps1" },
+    { . "$PSScriptRoot/Src/PSRL.ps1" },
     # bun auto complete
-    (. "$_src/Completion/bun.ps1"),
-    (Invoke-Expression  (&just --completions powershell | Out-String)),
-    (Invoke-Expression "$(direnv hook pwsh)"),
+    { . "$PSScriptRoot/Src/Completion/bun.ps1" },
+    { Invoke-Expression (&just --completions powershell | Out-String) },
+    { Invoke-Expression "$(direnv hook pwsh)" },
     {}
-)  | ForEach-Object { Register-EngineEvent -SourceIdentifier PowerShell.OnIdle -MaxTriggerCount 1 -Action $_ }| Out-Null
+) | ForEach-Object { Register-EngineEvent -SourceIdentifier PowerShell.OnIdle -MaxTriggerCount 1 -Action $_ } | Out-Null
