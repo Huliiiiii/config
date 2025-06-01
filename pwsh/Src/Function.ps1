@@ -11,26 +11,14 @@ function y {
 
 function mklink {
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$From,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$To
     )
-    
-    New-Item -ItemType SymbolicLink -Path $To -Target $From
-}
 
-function _webui {
-    $CurrentDir = Get-Location
-    
-    try {
-        Set-Location F:\src\stable-diffusion-webui-reForge
-        $ScriptPath = '.\webui-user.bat' 
-        Start-Process -Wait -NoNewWindow cmd.exe -ArgumentList "/c $ScriptPath"
-    } finally {
-        Set-Location -Path $CurrentDir
-    }
+    New-Item -ItemType SymbolicLink -Path $To -Target $From
 }
 
 function proxy {
@@ -48,3 +36,35 @@ function unproxy {
     Write-Output 'Reset proxy'
 }
 
+function wezssh() {
+    param(
+        [Parameter(Position = 0)]
+        [string]$target
+    )
+
+    Start-Process wezterm -WindowStyle Hidden -ArgumentList "ssh $target"
+}
+
+function dl {
+    param (
+        [string]$url,
+        [string[]]$ExtraArgs
+    )
+
+    if ([string]::IsNullOrWhiteSpace($url)) {
+        Write-Error 'Error: URL cannot be empty.'
+        return
+    }
+
+    do {
+        Write-Host "Trying to download $url..."
+        wget -c -t 0 --retry-connrefused --waitretry=5 @ExtraArgs $url
+        $success = $LASTEXITCODE
+        if ($success -ne 0) {
+            Write-Host 'Download failed. Retrying in 5 seconds...'
+            Start-Sleep -Seconds 5
+        }
+    } while ($success -ne 0)
+
+    Write-Host 'Download completed successfully!'
+}

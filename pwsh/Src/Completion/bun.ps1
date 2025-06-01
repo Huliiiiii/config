@@ -1,3 +1,4 @@
+# Copy from https://github.com/oven-sh/bun/pull/10424
 <#
 .SYNOPSIS
   This is a PowerShell script that provides tab completion for the Bun CLI.
@@ -15,14 +16,14 @@
 
 
 # Pattern used to extract flags from `bun --help` output
-$script:BunHelpFlagPattern = "^\s+(?<Alias>-[\w]+)?,?\s+(?<LongName>--[-\w]+)?\s+(?<Description>.+?)$"
+$script:BunHelpFlagPattern = '^\s+(?<Alias>-[\w]+)?,?\s+(?<LongName>--[-\w]+)?\s+(?<Description>.+?)$'
 # Global arguments are cached in memory after the first load
 $script:BunGlobalArguments = $null
 # Subcommands are manually defined because `bun getcompletes` doesn't provide info on them
 $script:BunSubCommands = @(
   @{
-    Name        = "run"
-    Description = "Execute a file with Bun or run a package.json script"
+    Name        = 'run'
+    Description = 'Execute a file with Bun or run a package.json script'
     Completers  = @(
       {
         # Get scripts runnable from package json via `bun getcompletes z`
@@ -30,7 +31,7 @@ $script:BunSubCommands = @(
           [string] $WordToComplete
         )
         $env:MAX_DESCRIPTION_LEN = 250
-        return & bun getcompletes z | Where-Object { $_ -like "$WordToComplete*" } | Foreach-Object {
+        return & bun getcompletes z | Where-Object { $_ -like "$WordToComplete*" } | ForEach-Object {
           $script = $_.Split("`t")
           [System.Management.Automation.CompletionResult]::new($script[0], $script[0], 'ParameterValue', $script[1])
         }
@@ -40,7 +41,7 @@ $script:BunSubCommands = @(
         param (
           [string] $WordToComplete
         )
-        return & bun getcompletes b | Where-Object { $_ -like "$WordToComplete*" } | Foreach-Object {
+        return & bun getcompletes b | Where-Object { $_ -like "$WordToComplete*" } | ForEach-Object {
           [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
         }
       },
@@ -56,30 +57,30 @@ $script:BunSubCommands = @(
     )
   },
   @{
-    Name        = "test"
-    Description = "Run unit tests with Bun"
+    Name        = 'test'
+    Description = 'Run unit tests with Bun'
   },
   @{
-    Name        = "x"
-    Description = "Execute a package binary (CLI), installing if needed (bunx)"
+    Name        = 'x'
+    Description = 'Execute a package binary (CLI), installing if needed (bunx)'
   },
   @{
-    Name        = "repl"
-    Description = "Start a REPL session with Bun"
+    Name        = 'repl'
+    Description = 'Start a REPL session with Bun'
   },
   @{
-    Name        = "exec"
-    Description = "Run a shell script directly with Bun"
+    Name        = 'exec'
+    Description = 'Run a shell script directly with Bun'
   },
   @{
-    Name        = "install"
-    Alias       = "i"
-    Description = "Install dependencies for a package.json (bun i)"
+    Name        = 'install'
+    Alias       = 'i'
+    Description = 'Install dependencies for a package.json (bun i)'
   },
   @{
-    Name        = "add"
-    Alias       = "a"
-    Description = "Add a dependency to package.json (bun a)"
+    Name        = 'add'
+    Alias       = 'a'
+    Description = 'Add a dependency to package.json (bun a)'
     Completers  = @(
       {
         # Get frequently installed packages via `bun getcompletes a`
@@ -87,7 +88,7 @@ $script:BunSubCommands = @(
           [string] $WordToComplete
         )
         Write-Debug "Completing package names for $WordToComplete"
-        return & bun getcompletes a "$WordToComplete" | Foreach-Object {
+        return & bun getcompletes a "$WordToComplete" | ForEach-Object {
           Write-Debug "Completing package $_"
           [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
         }
@@ -95,17 +96,17 @@ $script:BunSubCommands = @(
     )
   },
   @{
-    Name        = "remove"
-    Alias       = "rm"
-    Description = "Remove a dependency from package.json (bun rm)"
+    Name        = 'remove'
+    Alias       = 'rm'
+    Description = 'Remove a dependency from package.json (bun rm)'
     Completers  = @(
       {
         # Remove dependencies from package.json, this is not available in getcompletes
         param (
           [string] $WordToComplete
         )
-        if (Test-Path "package.json") {
-          $packageJson = Get-Content "package.json" -Raw | ConvertFrom-Json
+        if (Test-Path 'package.json') {
+          $packageJson = Get-Content 'package.json' -Raw | ConvertFrom-Json
           $packageJson.dependencies.PSObject.Properties.Name | Where-Object { $_ -like "$WordToComplete*" } | ForEach-Object {
             [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
           }
@@ -114,45 +115,45 @@ $script:BunSubCommands = @(
     )
   },
   @{
-    Name        = "update"
-    Description = "Update outdated dependencies"
+    Name        = 'update'
+    Description = 'Update outdated dependencies'
   },
   @{
-    Name        = "link"
-    Description = "Register or link a local npm package"
+    Name        = 'link'
+    Description = 'Register or link a local npm package'
   },
   @{
-    Name        = "unlink"
-    Description = "Unregister a local npm package"
+    Name        = 'unlink'
+    Description = 'Unregister a local npm package'
   },
   @{
-    Name        = "pm"
-    Description = "Additional package management utilities"
+    Name        = 'pm'
+    Description = 'Additional package management utilities'
   },
   @{
-    Name        = "build"
-    Description = "Bundle TypeScript & JavaScript into a single file"
+    Name        = 'build'
+    Description = 'Bundle TypeScript & JavaScript into a single file'
   },
   @{
-    Name        = "init"
-    Description = "Start an empty Bun project from a blank template"
+    Name        = 'init'
+    Description = 'Start an empty Bun project from a blank template'
   },
   @{
-    Name        = "create"
-    Alias       = "c"
-    Description = "Create a new project from a template (bun c)"
+    Name        = 'create'
+    Alias       = 'c'
+    Description = 'Create a new project from a template (bun c)'
   },
   @{
-    Name        = "upgrade"
-    Description = "Upgrade to latest version of Bun."
+    Name        = 'upgrade'
+    Description = 'Upgrade to latest version of Bun.'
   },
   @{
-    Name        = "discord"
-    Description = "Join the Bun Discord server"
+    Name        = 'discord'
+    Description = 'Join the Bun Discord server'
   }
   @{
-    Name        = "outdated"
-    Description = "Get outdated package list"
+    Name        = 'outdated'
+    Description = 'Get outdated package list'
   }
 )
 
@@ -172,12 +173,14 @@ function Get-BunSubCommandCompletions {
     $script:BunSubCommands | ForEach-Object {
       $subCommandCompletions += [System.Management.Automation.CompletionResult]::new($_.Name, $_.Name, 'ParameterValue', $_.Description)
     }
-  } elseif ($CommandAst.CommandElements.Count -eq 2 -and -not [string]::IsNullOrWhiteSpace($WordToComplete)) {
+  }
+  elseif ($CommandAst.CommandElements.Count -eq 2 -and -not [string]::IsNullOrWhiteSpace($WordToComplete)) {
     # Get the subcommand name completions with a partially complete subcommand name
     $script:BunSubCommands | Where-Object { $_.Name -like "$WordToComplete*" } | ForEach-Object {
       $subCommandCompletions += [System.Management.Automation.CompletionResult]::new($_.Name, $_.Name, 'ParameterValue', $_.Description)
     }
-  } elseif ($subCommand -and ($CommandAst.CommandElements.Count -gt 2 -or [string]::IsNullOrWhiteSpace($WordToComplete))) {
+  }
+  elseif ($subCommand -and ($CommandAst.CommandElements.Count -gt 2 -or [string]::IsNullOrWhiteSpace($WordToComplete))) {
     # Invoke all dynamic completers for the subcommand
     if ($subCommand.Completers) {
       $subCommandCompletions += $subCommand.Completers | ForEach-Object {
@@ -232,7 +235,7 @@ function Get-BunGlobalArgumentCompletions {
   }
 }
 
-Register-ArgumentCompleter -Native -CommandName "bun" -ScriptBlock {
+Register-ArgumentCompleter -Native -CommandName 'bun' -ScriptBlock {
   param(
     [string] $WordToComplete,
     [System.Management.Automation.Language.CommandAst] $CommandAst,
@@ -244,5 +247,5 @@ Register-ArgumentCompleter -Native -CommandName "bun" -ScriptBlock {
   $completions = @()
   $completions += Get-BunSubCommandCompletions -SubCommandName $subCommandName -CommandAst $CommandAst -WordToComplete $WordToComplete
   $completions += Get-BunGlobalArgumentCompletions -WordToComplete $WordToComplete
-  return $completions | Select-Object * -Unique | Foreach-Object { [System.Management.Automation.CompletionResult]::new($_.CompletionText, $_.ListItemText, $_.ResultType, $_.ToolTip) }
+  return $completions | Select-Object * -Unique | ForEach-Object { [System.Management.Automation.CompletionResult]::new($_.CompletionText, $_.ListItemText, $_.ResultType, $_.ToolTip) }
 }

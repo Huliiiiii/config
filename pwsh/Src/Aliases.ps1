@@ -5,8 +5,10 @@ function Get-SR-History {
 Set-Alias sr-data Get-SR-History
 
 function Start-Obsidian {
-    $cmd = 'Start-Process	"C:\Users\Fox\AppData\Local\Programs\Obsidian\Obsidian.exe"'
+    $cmd = 'Start-Process "~\AppData\Local\Programs\Obsidian\Obsidian.exe"'
     New-Window($cmd)
 }
 
 Set-Alias obsidian Start-Obsidian
+
+Set-Alias sh 'C:\Program Files\Git\git-bash.exe'
